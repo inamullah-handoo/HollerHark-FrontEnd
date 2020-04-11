@@ -1,0 +1,8 @@
+<div #us *ngFor="let user of users" [attr.id]="user._id">
+    <div class="alert alert-primary">
+        <span class="h3 m-0">
+            {{user.name}}
+            <button class="btn btn-success btn-sm m-0 mt-1 pull-right align-baseline" (click)="load(us)">View</button>
+        </span>
+    </div>
+</div>

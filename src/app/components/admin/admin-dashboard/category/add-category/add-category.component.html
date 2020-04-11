@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        Add Category
+    </div>
+    <div class="card-body">
+        <form #addCategoryForm="ngForm" (ngSubmit)="addCategory()">
+            <div class="form-group row m-0">
+                <label class="col-sm-3 col-form-label text-dark" [ngClass]="{'text-danger': de.invalid && de.touched}">Dean</label>
+                <div class="col-sm-8">
+                    <select #de="ngModel" [class.is-invalid]="de.invalid && de.touched" required type="text" [(ngModel)]="dean_id" class="form-control" name="dean_id">
+                        <option *ngFor="let de of des" value="{{de.id}}">{{de.name}}</option>
+                    </select>
+                    <!-- <input #de="ngModel" [ngClass]="{'is-invalid': de.invalid && de.touched}" required type="text" [(ngModel)]="dean_id" name="dean_id" class="form-control"> -->
+                    <small class="invalid-feedback">Dean is required</small>
+                </div>
+            </div>
+            <div class="form-group row m-0">
+                <label class="col-sm-3 col-form-label text-dark" [ngClass]="{'text-danger': cat.invalid && cat.touched}">Category</label>
+                <div class="col-sm-8">
+                    <input #cat="ngModel" [ngClass]="{'is-invalid': cat.invalid && cat.touched}" required type="text" [(ngModel)]="category" name="category" class="form-control">
+                    <small class="invalid-feedback">Category is required</small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="reset" class="btn btn-success ml-5" value="Clear">Clear</button>
+                <button [disabled]="addCategoryForm.invalid" type="submit" class="btn btn-primary mr-5" value="Submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

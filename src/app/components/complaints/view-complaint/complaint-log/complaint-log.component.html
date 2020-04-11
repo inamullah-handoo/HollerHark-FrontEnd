@@ -1,0 +1,11 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        Complaint Log
+    </div>
+    <div class="card-body px-5">
+        <div *ngFor="let log of data">
+            {{log}}
+        </div>
+        <button type="reset" class="btn btn-outline-primary pull-right" (click)="view()">Go back</button>
+    </div>
+</div>

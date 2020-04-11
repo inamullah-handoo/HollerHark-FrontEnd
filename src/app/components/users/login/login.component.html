@@ -1,0 +1,24 @@
+<form #loginForm="ngForm" class="w-50 ml-auto pb-5" (ngSubmit)="login()">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span for="email" class="input-group-text text-white mr-1 rounded-left" [ngClass]="{'bg-primary': em.valid || em.untouched, 'bg-danger': em.invalid && em.touched}">Email</span>
+        </div>
+        <input #em="ngModel" [ngClass]="{'is-invalid': em.invalid && em.touched}" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" type="email" [(ngModel)]="email" class="form-control" name="email">
+        <div class="invalid-feedback">Email is required</div>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span for="password" class="input-group-text text-white mr-1 rounded-left" [ngClass]="{'bg-primary': pass.valid || pass.untouched, 'bg-danger': pass.invalid && pass.touched}">Password</span>
+        </div>
+        <input #pass="ngModel" [ngClass]="{'is-invalid': pass.invalid && pass.touched}" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" type="password" [(ngModel)]="password" class="form-control" name="password">
+        <div class="invalid-feedback">Password must contain:
+            <ul>
+                <li>1 Uppercase</li>
+                <li>1 Lowercase</li>
+                <li>1 Number/Special Character</li>
+                <li>Minimum 8 Characters</li>
+            </ul>
+        </div>
+    </div>
+    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary pull-right" value="Submit">Submit</button>
+</form>

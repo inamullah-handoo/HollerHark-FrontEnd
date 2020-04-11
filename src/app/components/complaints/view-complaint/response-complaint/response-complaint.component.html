@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        Response of Complaint
+    </div>
+    <div class="card-body">
+        <form #complaintResponseForm="ngForm" (ngSubmit)="responseComplaint()">
+            <ul class="list-group">
+                <li class="list-group-item py-1">
+                    <div class="form-group row m-0">
+                        <label class="col-sm-4 col-form-label text-dark" [ngClass]="{'text-danger': wm.invalid && wm.touched}">Message</label>
+                        <div class="col-sm-8">
+                            <input #wm="ngModel" [ngClass]="{'is-invalid': wm.invalid && wm.touched}" required type="text" [(ngModel)]="workerMsg" name="workerMsg" class="form-control">
+                            <span class="invalid-feedback">Message is required</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item text-right">
+                    <button type="reset" class="btn btn-outline-primary mr-3" (click)="view()">Go back</button>
+                    <button [disabled]="complaintResponseForm.invalid" type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>

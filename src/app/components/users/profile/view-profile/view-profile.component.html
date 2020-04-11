@@ -1,0 +1,15 @@
+<div *ngIf="user" class="card">
+    <div class="card-header card-header-primary">
+        <span class="nav-title">{{user.name}}</span>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li *ngIf="user.rollno" class="list-group-item">Roll Number : {{user.rollno}}</li>
+            <li class="list-group-item">Email : {{user.email}}</li>
+            <li class="list-group-item">Phone Number : {{user.phoneno}}</li>
+            <li *ngIf="user.school" class="list-group-item">School : {{user.school}}</li>
+            <li *ngIf="user.dept" class="list-group-item">Department : {{user.dept}}</li>
+            <li *ngIf="user.batch" class="list-group-item">Batch : {{user.batch}}</li>
+        </ul>
+    </div>
+</div>

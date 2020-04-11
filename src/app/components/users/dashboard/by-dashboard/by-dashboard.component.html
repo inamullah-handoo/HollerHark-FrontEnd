@@ -1,0 +1,44 @@
+<div *ngIf="show">
+    <h2>Complaints registered by you:</h2>
+    <div class="card-deck text-center mt-5">
+        <div class="card card-stats">
+            <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                    <h1 class="m-2">{{npy}}</h1>
+                </div>
+                <h5 class="card-title">Not Processed Yet</h5>
+            </div>
+            <div class="card-footer">
+                <div class="stats ml-auto">
+                    <button class="btn btn-outline-primary btn-sm" [routerLink]="['/complaint/list/Not Processed Yet&by']">View</button>
+                </div>
+            </div>
+        </div>
+        <div class="card card-stats">
+            <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                    <h1 class="m-2">{{ip}}</h1>
+                </div>
+                <h5 class="card-title">In Progress</h5>
+            </div>
+            <div class="card-footer">
+                <div class="stats ml-auto">
+                    <button class="btn btn-outline-primary btn-sm" [routerLink]="['/complaint/list/In Progress&by']">View</button>
+                </div>
+            </div>
+        </div>
+        <div class="card card-stats">
+            <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                    <h1 class="m-2">{{c}}</h1>
+                </div>
+                <h5 class="card-title">Completed</h5>
+            </div>
+            <div class="card-footer">
+                <div class="stats ml-auto">
+                    <button class="btn btn-outline-primary btn-sm" [routerLink]="['/complaint/list/Completed&by']">View</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="row justify-content-between">
+    <div class="col-md-9">
+        <app-by-dashboard *ngIf="by"></app-by-dashboard>
+        <app-under-dashboard *ngIf="under"></app-under-dashboard>
+    </div>
+    <div *ngIf="show" class="col-md-3 p-1">
+        <button class="btn btn-primary" (click)="viewBy()">View Registered Complaints</button>
+        <button class="btn btn-primary" (click)="viewUnder()">View Complaints Under You</button>
+    </div>
+</div>

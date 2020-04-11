@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        Categories
+    </div>
+    <div class="card-body">
+        <table class="table text-center">
+            <thead class="thead">
+                <tr>
+                    <th>S. No.</th>
+                    <th>Dean</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let o of op">
+                    <td class="border-0" scope="row">{{o.i}}</td>
+                    <td class="border-0">{{o.de}}</td>
+                    <td class="border-0">{{o.cat}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

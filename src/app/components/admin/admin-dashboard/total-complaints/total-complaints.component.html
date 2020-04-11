@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        Total Complaints Registered
+    </div>
+    <div class="card-body">
+        <div class="card-deck">
+            <div class="card card-stats">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <h3 class="m-0">{{npy}}</h3>
+                    </div>
+                    <h5 class="card-title">Not Processed Yet</h5>
+                </div>
+                <div class="card-footer">
+                    <div class="stats ml-auto">
+                        <button class="btn btn-outline-primary btn-sm" [routerLink]="['/complaint/list/Not Processed Yet&']">View</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-stats">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <h3 class="m-0">{{ip}}</h3>
+                    </div>
+                    <h5 class="card-title">In Progress</h5>
+                </div>
+                <div class="card-footer">
+                    <div class="stats ml-auto">
+                        <button class="btn btn-outline-primary btn-sm" [routerLink]="['/complaint/list/In Progress&']">View</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-stats">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <h3 class="m-0">{{c}}</h3>
+                    </div>
+                    <h5 class="card-title">Completed</h5>
+                </div>
+                <div class="card-footer">
+                    <div class="stats ml-auto">
+                        <button class="btn btn-outline-primary btn-sm" [routerLink]="['/complaint/list/Completed&']">View</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

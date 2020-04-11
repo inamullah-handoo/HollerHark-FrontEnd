@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-header card-header-primary row justify-content-between">
+        <h3 class="col-3 m-0">{{title}}</h3>
+        <div class="col-3">
+            <button class="btn btn-primary m-0" (click)="log()">View Log</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">Category : {{category}}</li>
+            <li class="list-group-item">Status : {{status}}</li>
+            <li *ngIf="user_id" class="list-group-item">User : {{user_id}}</li>
+            <li class="list-group-item">Dean : {{dean_id}}</li>
+            <li class="list-group-item">Worker : {{worker_id}}</li>
+            <li *ngIf="deanMsg" class="list-group-item">Dean Message : {{deanMsg}}</li>
+            <li *ngIf="workerMsg" class="list-group-item">Worker Message : {{workerMsg}}</li>
+            <li *ngIf="userMsg" class="list-group-item">Feedback Message : {{userMsg}}</li>
+            <li class="list-group-item">Message : {{msg}}</li>
+            <li class="list-group-item">Registered Date : {{registeredDate}}</li>
+            <li class="list-group-item">Completed Date : {{completedDate}}</li>
+        </ul>
+        <div *ngIf="showBtnDelete || showBtnEdit || showBtnFeedback || showBtnForward || showBtnResponse || showBtnStatus" class="text-right">
+            <button *ngIf="showBtnEdit" class="btn btn-outline-primary mr-3" (click)="modify()">Edit</button>
+            <button *ngIf="showBtnDelete" class="btn btn-outline-danger mr-3" (click)="delete()">Delete</button>
+            <button *ngIf="showBtnForward" class="btn btn-outline-success mr-3" (click)="forward()">Forward</button>
+            <button *ngIf="showBtnResponse" class="btn btn-outline-success mr-3" (click)="response()">Send Response</button>
+            <button *ngIf="showBtnStatus" class="btn btn-outline-success mr-3" (click)="changeStatus()">Change Status</button>
+            <button *ngIf="showBtnFeedback" class="btn btn-outline-success mr-3" (click)="sendFeedback()">Send Feedback</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<form #complaintForm="ngForm" class="w-50 ml-auto pb-5" (ngSubmit)="registerComplaint()">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span [class.bg-primary]="subject.valid || subject.untouched" [class.bg-danger]="subject.invalid && subject.touched" class="input-group-text text-white rounded-left mr-1">Title</span>
+        </div>
+        <input #subject="ngModel" [class.is-invalid]="subject.invalid && subject.touched" required type="text" [(ngModel)]="title" class="form-control" name="title">
+        <small class="invalid-feedback">Title is required</small>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span [class.bg-primary]="cat.valid || cat.untouched" [class.bg-danger]="cat.invalid && cat.touched" class="input-group-text bg-primary text-white rounded-left mr-1">Category</span>
+        </div>
+        <select #cat="ngModel" [class.is-invalid]="cat.invalid && cat.touched" required type="text" [(ngModel)]="category" class="form-control" name="category">
+            <option *ngFor="let cat of categories" value="{{cat}}">{{cat}}</option>
+        </select>
+        <!-- <input #cat="ngModel" [class.is-invalid]="cat.invalid && cat.touched" required type="text" [(ngModel)]="category" class="form-control" name="category"> -->
+        <small class="invalid-feedback">Category is required</small>
+    </div>
+    <!-- <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span [class.bg-primary]="did.valid || did.untouched" [class.bg-danger]="did.invalid && did.touched" class="input-group-text bg-primary text-white rounded-left mr-1">Dean ID</span>
+        </div>
+        <input #did="ngModel" [class.is-invalid]="did.invalid && did.touched" required type="text" [(ngModel)]="dean_id" class="form-control" name="dean_id">
+        <small class="invalid-feedback">Dean ID is required</small>
+    </div> -->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span [class.bg-primary]="m.valid || m.untouched" [class.bg-danger]="m.invalid && m.touched" class="input-group-text bg-primary text-white rounded-left mr-1">MSG</span>
+        </div>
+        <input #m="ngModel" [class.is-invalid]="m.invalid && m.touched" required type="text" [(ngModel)]="msg" class="form-control" name="msg">
+        <small class="invalid-feedback">Message is required</small>
+    </div>
+    <button [disabled]="complaintForm.invalid" type="submit" class="btn btn-success pull-right" value="Submit">Submit</button>
+</form>

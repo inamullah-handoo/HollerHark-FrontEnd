@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/client-src",
+            "outputPath": "../public",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,9 +24,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "assets/css/material-dashboard.css"
             ],
-            "scripts": []
+            "scripts": [
+              "assets/js/core/jquery.min.js",
+              "assets/js/core/popper.min.js",
+              "assets/js/core/bootstrap-material-design.min.js",
+              "assets/js/plugins/perfect-scrollbar.jquery.min.js",
+              "assets/js/plugins/chartist.min.js",
+              "assets/js/plugins/bootstrap-notify.js",
+              "assets/js/material-dashboard.js"
+            ]
           },
           "configurations": {
             "production": {

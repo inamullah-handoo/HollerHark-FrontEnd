@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        Give Feedback
+    </div>
+    <div class="card-body">
+        <form #complaintFeedbackForm="ngForm" (ngSubmit)="usersFeedback()">
+            <ul class="list-group">
+                <li class="list-group-item py-1">
+                    <div class="form-group row m-0">
+                        <label class="col-sm-4 col-form-label text-dark" [ngClass]="{'text-danger': fb.invalid && fb.touched}">Message</label>
+                        <div class="col-sm-8">
+                            <input #fb="ngModel" [ngClass]="{'is-invalid': fb.invalid && fb.touched}" required type="text" [(ngModel)]="userMsg" name="userMsg" class="form-control">
+                            <div class="invalid-feedback">Message is required</div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item text-right">
+                    <button type="reset" class="btn btn-outline-primary mr-3" (click)="view()">Go back</button>
+                    <button [disabled]="complaintFeedbackForm.invalid" type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<app-complaint-details [data]="data" *ngIf="displayView" (displayModify)="showModify()" (displayForward)="showForward()" (displayResponse)="showResponse()" (displayStatus)="showStatus()" (displayFeedback)="showFeedback()" (displayLog)="showLog()"></app-complaint-details>
+<app-modify-complaint [data]="data" *ngIf="displayModify" (displayView)="showView()"></app-modify-complaint>
+<app-forward-complaint *ngIf="displayForward" (displayView)="showView()"></app-forward-complaint>
+<app-response-complaint *ngIf="displayResponse" (displayView)="showView()"></app-response-complaint>
+<app-change-status *ngIf="displayStatus" (displayView)="showView()"></app-change-status>
+<app-send-feedback *ngIf="displayFeedback" (displayView)="showView()"></app-send-feedback>
+<app-complaint-log [data]="data.log" *ngIf="displayLog" (displayView)="showView()"></app-complaint-log>

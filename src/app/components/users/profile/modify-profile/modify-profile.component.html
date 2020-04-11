@@ -1,0 +1,66 @@
+<div *ngIf="user" class="card">
+    <div class="card-header card-header-primary">
+        <span class="nav-title">Modify Profile</span>
+        <span href="#" *ngIf="!show" class="icon pull-right" (click)="load()">
+            <span class="material-icons md-3D">create</span>
+        </span>
+    </div>
+    <div class="card-body">
+        <form #userModifyForm="ngForm" (ngSubmit)="updateProfile()">
+            <div *ngIf="show">
+                <div class="form-group row m-0">
+                    <label class="col-sm-3 col-form-label text-dark" [ngClass]="{'text-danger': nam.invalid && nam.touched}">Full Name</label>
+                    <div class="col-sm-8">
+                        <input #nam="ngModel" [ngClass]="{'is-invalid': nam.invalid && nam.touched}" required type="text" [(ngModel)]="name" name="name" class="form-control">
+                        <small class="invalid-feedback">Enter your Full Name</small>
+                    </div>
+                </div>
+                <div *ngIf="user.rollno" class="form-group row m-0">
+                    <label class="col-sm-3 col-form-label text-dark">Roll Number</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly [(ngModel)]="rollno" name="rollno" class="form-control-plaintext">
+                    </div>
+                </div>
+                <div class="form-group row m-0">
+                    <label class="col-sm-3 col-form-label text-dark" [ngClass]="{'text-danger': em.invalid && em.touched}">Email</label>
+                    <div class="col-sm-8">
+                        <input #em="ngModel" [ngClass]="{'is-invalid': em.invalid && em.touched}" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" type="email" [(ngModel)]="email" name="email" class="form-control">
+                        <small class="invalid-feedback">Enter valid Email</small>
+                    </div>
+                </div>
+                <div class="form-group row m-0">
+                    <label class="col-sm-3 col-form-label text-dark" [ngClass]="{'text-danger': ph.invalid && ph.touched}">Phone Number</label>
+                    <div class="col-sm-8">
+                        <input #ph="ngModel" [ngClass]="{'is-invalid': ph.invalid && ph.touched}" required type="text" [(ngModel)]="phoneno" name="phoneno" class="form-control">
+                        <small class="invalid-feedback">Enter valid Phone Number</small>
+                    </div>
+                </div>
+                <div *ngIf="user.school" class="form-group row m-0">
+                    <label class="col-sm-3 col-form-label text-dark" [ngClass]="{'text-danger': sch.invalid && sch.touched}">School</label>
+                    <div class="col-sm-8">
+                        <input #sch="ngModel" [ngClass]="{'is-invalid': nam.invalid && nam.touched}" required type="text" [(ngModel)]="school" name="school" class="form-control">
+                        <small class="invalid-feedback">Enter your School</small>
+                    </div>
+                </div>
+                <div *ngIf="user.dept" class="form-group row m-0">
+                    <label class="col-sm-3 col-form-label text-dark" [ngClass]="{'text-danger': dep.invalid && dep.touched}">Department</label>
+                    <div class="col-sm-8">
+                        <input #dep="ngModel" [ngClass]="{'is-invalid': dep.invalid && dep.touched}" required type="text" [(ngModel)]="dept" name="dept" class="form-control">
+                        <small class="invalid-feedback">Enter your Department</small>
+                    </div>
+                </div>
+                <div *ngIf="user.batch" class="form-group row m-0">
+                    <label class="col-sm-3 col-form-label text-dark" [ngClass]="{'text-danger': bach.invalid && bach.touched}">Batch</label>
+                    <div class="col-sm-8">
+                        <input #bach="ngModel" [ngClass]="{'is-invalid': bach.invalid && bach.touched}" required type="text" [(ngModel)]="batch" name="batch" class="form-control">
+                        <small class="invalid-feedback">Enter your Batch</small>
+                    </div>
+                </div>
+                <div *ngIf="show" class="card-footer">
+                    <button type="reset" class="btn btn-success ml-5" value="Clear" (click)=clear()>Clear</button>
+                    <button [disabled]="userModifyForm.invalid" type="submit" class="btn btn-primary mr-5" value="Submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

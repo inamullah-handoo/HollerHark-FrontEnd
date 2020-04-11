@@ -1,0 +1,60 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        Total Users Registered
+    </div>
+    <div class="card-body">
+        <div class="card card-stats">
+            <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                    <h3 class="m-0">{{st}}</h3>
+                </div>
+                <h5 class="card-title">Student</h5>
+            </div>
+            <div class="card-footer">
+                <div class="stats ml-auto">
+                    <button class="btn btn-outline-primary btn-sm" [routerLink]="['/admin/userList/Student']">View</button>
+                </div>
+            </div>
+        </div>
+        <div class="card card-stats">
+            <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                    <h3 class="m-0">{{teach}}</h3>
+                </div>
+                <h5 class="card-title">Teaching Faculty</h5>
+            </div>
+            <div class="card-footer">
+                <div class="stats ml-auto">
+                    <button class="btn btn-outline-primary btn-sm" [routerLink]="['/admin/userList/Teaching']">View</button>
+                </div>
+            </div>
+        </div>
+        <div class="card card-stats">
+            <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                    <h3 class="m-0">{{nont}}</h3>
+                </div>
+                <h5 class="card-title">Non-Teach Faculty</h5>
+            </div>
+            <div class="card-footer">
+                <div class="stats ml-auto">
+                    <button class="btn btn-outline-primary btn-sm" [routerLink]="['/admin/userList/Non-Teaching']">View</button>
+                </div>
+            </div>
+        </div>
+        <div class="card card-stats">
+            <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                    <h3 class="m-0">{{de}}</h3>
+                </div>
+                <h5 class="card-title">Dean</h5>
+            </div>
+            <div class="card-footer">
+                <div class="stats ml-auto">
+                    <button class="btn btn-outline-success btn-sm" [routerLink]="['/admin/dean/register']">Add</button>
+                    <button class="btn btn-outline-primary btn-sm" [routerLink]="['/admin/userList/Dean']">View</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

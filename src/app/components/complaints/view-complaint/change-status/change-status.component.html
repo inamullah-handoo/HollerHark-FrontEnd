@@ -1,0 +1,27 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        Change Status
+    </div>
+    <div class="card-body">
+        <form #complaintStatusForm="ngForm" (ngSubmit)="changeStatus()">
+            <ul class="list-group">
+                <li class="list-group-item py-1">
+                    <div class="form-group row m-0">
+                        <label class="col-sm-4 col-form-label text-dark" [ngClass]="{'text-danger': s.invalid && s.touched}">Status</label>
+                        <div class="col-sm-8">
+                            <select #s="ngModel" [ngClass]="{'is-invalid': s.invalid && s.touched}" required [(ngModel)]="newStatus" class="form-control" name="newStatus">
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                            <div class="invalid-feedback">Status is required</div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item text-right">
+                    <button type="reset" class="btn btn-outline-primary mr-3" (click)="view()">Go back</button>
+                    <button [disabled]="complaintStatusForm.invalid" type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>

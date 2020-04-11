@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        Forward Complaint
+    </div>
+    <div class="card-body">
+        <form #complaintForwardForm="ngForm" (ngSubmit)="forwardComplaint()">
+            <ul class="list-group">
+                <li class="list-group-item py-1">
+                    <div class="form-group row m-0">
+                        <label class="col-sm-4 col-form-label text-dark" [ngClass]="{'text-danger': wid.invalid && wid.touched}">Worker</label>
+                        <div class="col-sm-8">
+                            <select #wid="ngModel" [ngClass]="{'is-invalid': wid.invalid && wid.touched}" required type="text" [(ngModel)]="worker_id" name="worker_id" class="form-control">
+                                <option *ngFor="let worker of workers" value="{{worker.id}}">
+                                    {{worker.name}}
+                                </option>
+                            </select>
+                            <!-- <input #wid="ngModel" [ngClass]="{'is-invalid': wid.invalid && wid.touched}" required type="text" [(ngModel)]="worker_id" name="worker_id" class="form-control"> -->
+                            <small class="invalid-feedback">Worker is required</small>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item py-1">
+                    <div class="form-group row m-0">
+                        <label class="col-sm-4 col-form-label text-dark" [ngClass]="{'text-danger': dm.invalid && dm.touched}">Message</label>
+                        <div class="col-sm-8">
+                            <input #dm="ngModel" [ngClass]="{'is-invalid': dm.invalid && dm.touched}" required type="text" [(ngModel)]="deanMsg" name="deanMsg" class="form-control">
+                            <small class="invalid-feedback">Message is required</small>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item text-right">
+                    <button type="reset" class="btn btn-outline-primary mr-3" (click)="view()">Go back</button>
+                    <button [disabled]="complaintForwardForm.invalid" type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>

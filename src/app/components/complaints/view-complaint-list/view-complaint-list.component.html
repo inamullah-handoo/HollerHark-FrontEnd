@@ -1,0 +1,8 @@
+<div #c *ngFor="let comp of complaint" [attr.id]="comp.id">
+    <div class="alert alert-primary">
+        <span class="h3 m-0">
+            {{comp.title}}
+            <button class="btn btn-success btn-sm m-0 mt-1 pull-right align-baseline" (click)="load(c)">View</button>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="card w-50 ml-auto ">
+    <div class="card-header card-header-primary">
+        Enter Dean details
+    </div>
+    <div class="card-body">
+        <form #userRegisterForm="ngForm" (ngSubmit)="register()">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span for="name"  class="input-group-text mr-1" [ngClass]="{'text-danger': nam.invalid && nam.touched}">Full Name</span>
+                </div>
+                <input #nam="ngModel" [ngClass]="{'is-invalid': nam.invalid && nam.touched}" required type="text" [(ngModel)]="name" class="form-control" name="name">
+                <small class="invalid-feedback ml-5">Enter Full Name</small>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span for="email"  class="input-group-text mr-1" [ngClass]="{'text-danger': em.invalid && em.touched}">Email</span>
+                </div>
+                <input #em="ngModel" [ngClass]="{'is-invalid': em.invalid && em.touched}" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" type="email" [(ngModel)]="email" class="form-control" name="email">
+                <small class="invalid-feedback ml-5">Enter valid Email</small>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span for="phoneno"  class="input-group-text mr-1" [ngClass]="{'text-danger': ph.invalid && ph.touched}">Phone No.</span>
+                </div>
+                <input #ph="ngModel" [ngClass]="{'is-invalid': ph.invalid && ph.touched}" required pattern="[0-9]{10}" type="tel" [(ngModel)]="phoneno" class="form-control" name="phoneno">
+                <small class="invalid-feedback ml-5">Enter valid Phone Number</small>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span for="school"  class="input-group-text mr-1" [ngClass]="{'text-danger': schl.invalid && schl.touched}">School</span>
+                </div>
+                <input #schl="ngModel" [ngClass]="{'is-invalid': schl.invalid && schl.touched}" required type="text" [(ngModel)]="school" class="form-control" name="school">
+                <small class="invalid-feedback ml-5">Enter your School</small>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span for="password"  class="input-group-text mr-1" [ngClass]="{'text-danger': pass.invalid && pass.touched}">Password</span>
+                </div>
+                <input #pass="ngModel" [ngClass]="{'is-invalid': pass.invalid && pass.touched}" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" type="password" [(ngModel)]="password" class="form-control" name="password">
+                <small class="invalid-feedback ml-5">Password must contain:
+                    <ul>
+                        <li>1 Uppercase</li>
+                        <li>1 Lowercase</li>
+                        <li>1 Number/Special Character</li>
+                        <li>Minimum 8 Characters</li>
+                    </ul>
+                </small>
+            </div>
+            <button [disabled]="userRegisterForm.invalid" type="submit" class="btn btn-primary pull-right ml-5" value="Submit">Submit</button>
+            <button type="reset" class="btn btn-success pull-right">Clear</button>
+        </form>
+    </div>
+</div>
