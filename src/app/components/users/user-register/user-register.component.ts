@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 import { ValidationService } from "../../../services/validation.service";
 import { UserAuthService } from "../../../services/user-auth.service";
-import { Router } from '@angular/router';
-import { NgFlashMessageService } from 'ng-flash-messages';
+import { Router } from "@angular/router";
+import { NgFlashMessageService } from "ng-flash-messages";
 
 @Component({
-  selector: 'app-user-register',
-  templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.css']
+  selector: "app-user-register",
+  templateUrl: "./user-register.component.html",
+  styleUrls: ["./user-register.component.css"],
 })
 export class UserRegisterComponent implements OnInit {
   name: String;
@@ -28,23 +28,22 @@ export class UserRegisterComponent implements OnInit {
     private userAuthService: UserAuthService,
     private router: Router,
     private ngFlashMessageService: NgFlashMessageService
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  changeRole(){
-    if(this.role == 'Student'){
+  changeRole() {
+    if (this.role == "Student") {
       this.show = true;
-    }else{
+    } else {
       this.show = false;
     }
-    if(this.role == 'Non-Teaching'){
+    if (this.role == "Non-Teaching") {
       this.showSchool = false;
     }
   }
 
-  register(){
+  register() {
     const user = {
       name: this.name,
       email: this.email,
@@ -54,43 +53,44 @@ export class UserRegisterComponent implements OnInit {
       dept: this.dept,
       batch: this.batch,
       password: this.password,
-      role: this.role
-    }
+      role: this.role,
+    };
 
-    if(!this.validationService.validateRegister(user)){
+    if (!this.validationService.validateRegister(user)) {
       this.ngFlashMessageService.showFlashMessage({
-        messages: ['Please fill in all the fields'], 
+        messages: ["Please fill in all the fields"],
         dismissible: false,
         timeout: 3000,
-        type: 'danger'
+        type: "danger",
       });
-      this.router.navigate(['/user/register']);
-    }else if(!this.validationService.validateEmail(user.email)){
+      this.router.navigate(["/user/register"]);
+    } else if (!this.validationService.validateEmail(user.email)) {
       this.ngFlashMessageService.showFlashMessage({
-        messages: ['Enter a valid Email'], 
+        messages: ["Enter a valid Email"],
         dismissible: false,
         timeout: 3000,
-        type: 'danger'
+        type: "danger",
       });
-      this.router.navigate(['/user/register']);
-    }else{
+      this.router.navigate(["/user/register"]);
+    } else {
       this.userAuthService.registerUser(user).subscribe((data: any) => {
-        if(data.success){
+        // console.log(data);
+        if (data.success) {
           this.ngFlashMessageService.showFlashMessage({
-            messages: [data.msg], 
+            messages: [data.msg],
             dismissible: false,
             timeout: 3000,
-            type: 'success'
+            type: "success",
           });
-          this.router.navigate(['/user/login']);
-        }else{
+          this.router.navigate(["/user/login"]);
+        } else {
           this.ngFlashMessageService.showFlashMessage({
-            messages: [data.msg], 
+            messages: [data.msg],
             dismissible: false,
             timeout: 3000,
-            type: 'danger'
+            type: "danger",
           });
-          this.router.navigate(['/user/register']);
+          this.router.navigate(["/user/register"]);
         }
       });
     }

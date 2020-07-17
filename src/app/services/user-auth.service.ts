@@ -1,30 +1,30 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserAuthService {
   user: any;
-  localhost: string = 'http://localhost:3000/';
+  localhost: string = "http://localhost:3000/";
   authToken: string;
   helper = new JwtHelperService();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  loggedIn(){
+  loggedIn() {
     this.loadToken();
     return !this.helper.isTokenExpired(this.authToken);
   }
 
-  ifAdmin(){
-    const user = JSON.parse(localStorage.getItem('user'));
-    if(user){
-      if(user.role == "Admin"){
+  ifAdmin() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      if (user.role == "Admin") {
         return false;
-      }else{
+      } else {
         return true;
       }
     }
@@ -37,262 +37,381 @@ export class UserAuthService {
     // });
   }
 
-  registerUser(user): Observable<any>{
+  registerUser(user): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
+        "Content-Type": "application/json",
+      }),
     };
 
-    if(user.role == "Student"){
-      return this.http.post<any>(this.localhost + 'users/student/register', user, httpOptions);
-    }else{
-      return this.http.post<any>(this.localhost + 'users/faculty/register', user, httpOptions);
+    if (user.role == "Student") {
+      return this.http.post<any>(
+        this.localhost + "users/student/register",
+        user,
+        httpOptions
+      );
+    } else {
+      return this.http.post<any>(
+        this.localhost + "users/faculty/register",
+        user,
+        httpOptions
+      );
     }
   }
 
-  authenticateUser(user): Observable<any>{
+  activateEmail(token): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+        "Content-Type": "application/json",
+      }),
     };
 
-    return this.http.post<any>(this.localhost + 'users/authenticate', user, httpOptions);
+    return this.http.get<any>(
+      this.localhost + "users/activate/email/" + token,
+      httpOptions
+    );
   }
 
-  storeUserData(user, token){
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', token);
+  activatePhone(token): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+    };
+
+    return this.http.get<any>(
+      this.localhost + "users/activate/phone/" + token,
+      httpOptions
+    );
+  }
+
+  forgotPassword(email): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+    };
+
+    return this.http.post<any>(
+      this.localhost + "users/forgotpassword",
+      email,
+      httpOptions
+    );
+  }
+
+  checkToken(token): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+    };
+
+    return this.http.get<any>(
+      this.localhost + "users/resetpassword/" + token,
+      httpOptions
+    );
+  }
+
+  resetPassword(newPassword, token): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+    };
+
+    return this.http.post<any>(
+      this.localhost + "users/resetpassword/" + token,
+      newPassword,
+      httpOptions
+    );
+  }
+
+  authenticateUser(user): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+    };
+
+    return this.http.post<any>(
+      this.localhost + "users/authenticate",
+      user,
+      httpOptions
+    );
+  }
+
+  storeUserData(user, token) {
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
     this.user = user;
     this.authToken = token;
   }
 
-  loadToken(){
-    const token = localStorage.getItem('token');
+  loadToken() {
+    const token = localStorage.getItem("token");
     this.authToken = token;
   }
 
-  logOut(){
+  logOut() {
     this.authToken = null;
     this.user = null;
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   }
 
-  getUserID(){
+  getUserID() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/id', httpOptions);
+    return this.http.get<any>(this.localhost + "users/id", httpOptions);
   }
 
-  getUserName(id){
+  getUserName(id) {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/name/' + id, httpOptions);
+    return this.http.get<any>(this.localhost + "users/name/" + id, httpOptions);
   }
 
-  getUserRole(){
+  getUserRole() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/role', httpOptions);
+    return this.http.get<any>(this.localhost + "users/role", httpOptions);
   }
 
-  getProfile(){
+  getProfile() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/profile', httpOptions);
+    return this.http.get<any>(this.localhost + "users/profile", httpOptions);
   }
 
-  updateProfile(user, id){
+  updateProfile(user, id) {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.post<any>(this.localhost + 'users/profile/' + id, user, httpOptions);
+    return this.http.post<any>(
+      this.localhost + "users/profile/" + id,
+      user,
+      httpOptions
+    );
   }
 
-  updatePassword(passwords, id){
+  updatePassword(passwords, id) {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.post<any>(this.localhost + 'users/changePassword/' + id, passwords, httpOptions);
+    return this.http.post<any>(
+      this.localhost + "users/changePassword/" + id,
+      passwords,
+      httpOptions
+    );
   }
 
-  getByDashboard(){
+  getByDashboard() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/byDashboard', httpOptions);
+    return this.http.get<any>(
+      this.localhost + "users/byDashboard",
+      httpOptions
+    );
   }
 
-  getUnderDashboard(){
+  getUnderDashboard() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/underDashboard', httpOptions);
+    return this.http.get<any>(
+      this.localhost + "users/underDashboard",
+      httpOptions
+    );
   }
 
-  getAllComplaints(){
+  getAllComplaints() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/admin/complaints', httpOptions);
+    return this.http.get<any>(
+      this.localhost + "users/admin/complaints",
+      httpOptions
+    );
   }
 
-  getAllUsers(){
+  getAllUsers() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/admin/users', httpOptions);
+    return this.http.get<any>(
+      this.localhost + "users/admin/users",
+      httpOptions
+    );
   }
 
-  getCategories(){
+  getCategories() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/admin/category/view', httpOptions);
+    return this.http.get<any>(
+      this.localhost + "users/admin/category/view",
+      httpOptions
+    );
   }
 
-  addCategory(cat){
+  addCategory(cat) {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.post<any>(this.localhost + 'users/admin/category/add', cat, httpOptions);
+    return this.http.post<any>(
+      this.localhost + "users/admin/category/add",
+      cat,
+      httpOptions
+    );
   }
 
-  adminViewUserList(role){
+  adminViewUserList(role) {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/adminViewList/' + role, httpOptions);
+    return this.http.get<any>(
+      this.localhost + "users/adminViewList/" + role,
+      httpOptions
+    );
   }
 
-  getUserDetails(id){
+  getUserDetails(id) {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/admin/user/' + id, httpOptions);
+    return this.http.get<any>(
+      this.localhost + "users/admin/user/" + id,
+      httpOptions
+    );
   }
 
-  registerDean(user){
+  registerDean(user) {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.post<any>(this.localhost + 'users/dean/register', user, httpOptions);
+    return this.http.post<any>(
+      this.localhost + "users/dean/register",
+      user,
+      httpOptions
+    );
   }
 
-  getCatDean(){
+  getCatDean() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/deanCat', httpOptions);
+    return this.http.get<any>(this.localhost + "users/deanCat", httpOptions);
   }
 
-  getDeanID(){
+  getDeanID() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/deanID', httpOptions);
+    return this.http.get<any>(this.localhost + "users/deanID", httpOptions);
   }
 
-  getWorkerNameID(){
+  getWorkerNameID() {
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-      })
+        "Content-Type": "application/json",
+        Authorization: this.authToken,
+      }),
     };
 
-    return this.http.get<any>(this.localhost + 'users/workerNameID', httpOptions);
+    return this.http.get<any>(
+      this.localhost + "users/workerNameID",
+      httpOptions
+    );
   }
 }

@@ -1,83 +1,103 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ValidationService {
+  constructor() {}
 
-  constructor() { }
-
-  validateRegister(user){
-    if(user.role == 'Dean'){
-      if(!user.name || !user.email || !user.phoneno || !user.school || !user.password){
+  validateRegister(user) {
+    if (user.role == "Dean") {
+      if (
+        !user.name ||
+        !user.email ||
+        !user.phoneno ||
+        !user.school ||
+        !user.password
+      ) {
         return false;
-      }else{
+      } else {
         return true;
       }
-    }else if(!user.name || !user.email || !user.phoneno || !user.dept || !user.password || !user.role){
+    } else if (
+      !user.name ||
+      !user.email ||
+      !user.phoneno ||
+      !user.dept ||
+      !user.password ||
+      !user.role
+    ) {
       return false;
-    }else{
-      if(user.role == "Student" && (!user.rollno || !user.batch)){
+    } else {
+      if (user.role == "Student" && (!user.rollno || !user.batch)) {
         return false;
-      }else{
+      } else {
         return true;
       }
     }
   }
 
-  validateEmail(email){
+  validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   }
 
-  validateLogin(user){
-    if(!user.email || !user.password){
+  validatePassword(password) {
+    if (!password) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
 
-  validateModifyUser(user){
-    if(!user.name || !user.email || !user.phoneno || !user.school || !user.dept){
+  validateLogin(user) {
+    if (!user.email || !user.password) {
       return false;
-    }else{
-      if(user.role == "Student" && (!user.rollno || !user.batch)){
+    } else {
+      return true;
+    }
+  }
+
+  validateModifyUser(user) {
+    if (!user.name || !user.email || !user.phoneno || !user.school) {
+      return false;
+    } else {
+      if (user.role == "Student" && (!user.rollno || !user.batch)) {
         return false;
-      }else{
+      } else {
         return true;
       }
     }
   }
 
-  validateModifyPassword(user){
-    if(!user.oldPassword || !user.newPassword){
+  validateModifyPassword(user) {
+    if (!user.oldPassword || !user.newPassword) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
 
-  validateRegisterComplaint(complaint){
-    if(!complaint.title || !complaint.category || !complaint.msg){
+  validateRegisterComplaint(complaint) {
+    if (!complaint.title || !complaint.category || !complaint.msg) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
 
-  validateForwardComplaint(complaint){
-    if(!complaint.worker_id || !complaint.deanMsg){
+  validateForwardComplaint(complaint) {
+    if (!complaint.worker_id || !complaint.deanMsg) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
 
-  validateResponseComplaint(complaint){
-    if(!complaint.workerMsg){
+  validateResponseComplaint(complaint) {
+    if (!complaint.workerMsg) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
